@@ -15,7 +15,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          My page
+          Hello this is a test 
         </a>
       </header>
     </div>
