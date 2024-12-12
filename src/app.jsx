@@ -14,9 +14,10 @@ export default function Header() {
 
         <nav>
             
-            <h1 class = "logo-name">Premier League Fantasy</h1>
+            <h1 class = "logo-name"> Premier League Fantasy</h1>
 
             <div class = "menu" id ="nav-menu">
+
                 <ul class="links">
                     <li><a href="#">Home</a></li>
                     <li><a href="#">About</a></li>
