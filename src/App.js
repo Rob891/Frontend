@@ -1,46 +1,11 @@
-import './App.css';
+
 // import { render } from 'ejs';
+
 import React, { useState } from 'react';
+import Header from './app.jsx';
 
 
-export function Head() {
-
-  return (
-    <div className="Head1">
-      <h1> Premier League Fantasy </h1>
-
-
-      {/* <button type = "button" id = "signin"> Sign in </button>
-      <button type = "button"> Log in </button>
-
-    
-
-      <label htmlFor="uname"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="uname" required />
-      <br></br>
-  
-      <label htmlFor="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required />
-      <br></br>
-  
-      <button type="submit">Login</button>
-      <label>
-          <input type="checkbox" defaultChecked name="remember" /> Remember me
-        </label>
-
-     */}
-
-      
-      
-
-    </div>
-  );
-
-}
-
-
-export function App() {
-
+function App() {
 
   // keeps track wether user clicks sign or log in
   const [mode, setMode] = useState("normal");
@@ -49,8 +14,10 @@ export function App() {
 
   return ( 
     <div className="App">
+
+      <Header/> 
       
-      { mode === "normal" && (
+      { /*{ mode === "normal" && (
 
         <div class="default">
 
@@ -121,8 +88,10 @@ export function App() {
 
         </div>
 
-      )}
+      )}  */}
 
     </div>
   );
 }
+
+export default App;
