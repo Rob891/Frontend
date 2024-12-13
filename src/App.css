@@ -50,12 +50,16 @@
 /* Nav menu */
 nav .menu {
   
+
+
+
   /* Aligns items horizontally */
   display: flex; 
   align-items: center; 
   gap: 10px;
  
 }
+
 
 /* nav bar links */
 .menu .links {
