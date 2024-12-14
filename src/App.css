@@ -15,6 +15,7 @@
   --primary-color: #1a202c; /* Deep Navy */
   --secondary-color: #e53e3e; /* Vivid Red */
   --background-color: #2d3748; /* Charcoal Gray */
+  --button-text-color :#edf2f7;
   --text-color: #edf2f7; /* Off-White */
   --hover-color: #c53030; /* Deep Red */
 }
@@ -49,15 +50,11 @@
 
 /* Nav menu */
 nav .menu {
-  
-
-
 
   /* Aligns items horizontally */
   display: flex; 
   align-items: center; 
   gap: 10px;
- 
 }
 
 
@@ -100,7 +97,7 @@ nav .menu {
 }
 
 .menu .links li a:hover {
-  background-color: var(--hover-color); /* Navy hover effect for links */
+  background-color: var(--background-color); /* Navy hover effect for links */
   
 }
 
@@ -113,7 +110,7 @@ nav .menu {
   background-color: var(--hover-color); /* Navy background for buttons */
   border: 0; /* Removes default border */
   border-radius: 100px; /* Circular edges for buttons */
-  color: var(--secondary-color); /* White text */
+  color: var(--button-text-color); /* White text */
   cursor: pointer; /* Pointer cursor on hover */
    /* Inline and flexible layout for buttons */
   font-size: 16px; /* Font size for button text */
@@ -122,7 +119,6 @@ nav .menu {
   text-align: right; 
   transition: background-color 0.3s ease, color 0.3s ease; 
 
- 
 }
 
 
@@ -134,87 +130,118 @@ nav .menu {
 }
 
 /* Form Container Styles */
+/* Fullscreen container for both forms */
 .fullscreen-container {
-  display: flex; /* Centers content horizontally */
-  flex-direction: column; /* Stacks items vertically */
-  justify-content: center; /* Centers content vertically */
-  align-items: center; /* Aligns items in the center */
-  background-color: var(--secondary-color); /* Gold background for the container */
+  display: flex; /* Centers the content */
+  justify-content: center; /* Horizontally centers forms */
+  align-items: center; /* Vertically centers forms */
+  background-color: var(--background-color); /* Background for the whole section */
   height: 100vh; /* Full viewport height */
   width: 100vw; /* Full viewport width */
   padding: 20px; /* Adds spacing inside the container */
-  
-
 }
 
-/* Box Design for Forms */
-.form-box {
-  background-color: white; /* White background for the form */
-  padding: 20px; /* Inner spacing for the form box */
-  border-radius: 10px; /* Rounded edges for the form box */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
-  max-width: 400px; /* Maximum width for the box */
-  width: 100%; /* Full width within the max constraint */
-  text-align: center; /* Centers text alignment */
-  
- 
+.fullscreen-container h1 {
+  text-align: center;
+  display: flex;
 }
 
-.form-box h1 {
-  font-size: 24px; /* Title font size */
-  margin-bottom: 20px; /* Space below the title */
-  color: var(--primary-color); /* Navy title color */
+/* Form box styling */
+.form {
+  background-color: var(--primary-color); /* Solid background for the form box */
+  color: var(--text-color); /* Text color inside the form */
+  padding: 30px; /* Spacing around the form elements */
+  border-radius: 10px; /* Rounded corners for the form box */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow for depth */
+  max-width: 400px; /* Limits the form box width */
+  width: 100%; /* Ensures the box spans full width within the max constraint */
+  text-align: center; /* Centers the text */
+}
+
+/* Form titles */
+#login-title {
+  position:absolute;
+  display: flex;
+  justify-content: center;
+  height: 60vh;
+   /* Size for the title */
+  font-weight: bold; /* Makes the title bold */
+  color: var(--text-color); /* Title text color */
   
 }
 
-/* Input Group Styles */
+/* Input group styling */
 .input-group {
-  display: flex; /* Flexible layout for stacking label and input */
-  flex-direction: column; /* Ensures label and input stack vertically */
-  margin-bottom: 15px; /* Space below each input group */
-  
+  display: flex; /* Stacks label and input */
+  flex-direction: column; /* Ensures vertical stacking */
+  margin-bottom: 20px; /* Spacing between input fields */
+  text-align: left; /* Aligns labels to the left */
 }
 
 .input-group label {
   font-weight: bold; /* Bold text for labels */
-  margin-bottom: 5px; /* Space below the label */
-  color: white; /* Dark gray text */
-  
+  margin-bottom: 5px; /* Adds spacing below the label */
+  color: var(--text-color); /* Label color */
 }
 
 .input-group input {
-  padding: 10px; /* Inner padding for the input */
-  border: 1px solid #ccc; /* Light gray border */
+  padding: 10px; /* Inner spacing for inputs */
+  border: 1px solid #ccc; /* Light border for inputs */
   border-radius: 5px; /* Rounded corners for inputs */
   font-size: 14px; /* Font size for input text */
-  
+  background-color: var(--background-color); /* Matches the theme */
+  color: var(--text-color); /* Text color inside the inputs */
 }
 
-.input-group .msg {
-  font-size: 12px; /* Small font for messages */
-  color: #888; /* Light gray text for messages */
-  
+.input-group input:focus {
+  border-color: var(--hover-color); /* Highlighted border on focus */
+  outline: none; /* Removes default focus outline */
 }
 
-/* Button in Forms */
+/* Validation message styling */
+.msg {
+  font-size: 12px; /* Smaller font for validation messages */
+  color: #e53e3e; /* Red color for validation messages */
+  margin-top: 5px; /* Spacing above the message */
+}
+
+/* Form buttons */
 .login-button {
-  background-color: var(--primary-color); /* Navy background for buttons */
-  color: white; /* White text */
+  background-color: var(--secondary-color); /* Secondary color for buttons */
+  color: var(--button-text-color); /* White text for buttons */
   padding: 10px; /* Inner spacing for buttons */
   border: none; /* Removes default border */
   border-radius: 5px; /* Rounded corners for buttons */
+  font-size: 16px; /* Button font size */
   cursor: pointer; /* Pointer cursor on hover */
+  margin-top: 10px; /* Adds spacing above the button */
+  width: 100%; /* Makes the button span the full form width */
   transition: background-color 0.3s ease; /* Smooth background transition */
-  
 }
 
 .login-button:hover {
-  background-color: var(--hover-color); /* Lighter navy on hover */
-  
+  background-color: var(--hover-color); /* Hover effect for buttons */
+}
+
+/* Go Back button styling */
+button[type="button"] {
+  margin-top: 10px; /* Adds spacing above the button */
+  color: var(--button-text-color); /* White text for the Go Back button */
+  background-color: var(--primary-color); /* Matches the form background */
+  padding: 10px; /* Inner spacing for the button */
+  border: 1px solid var(--hover-color); /* Subtle border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor */
+}
+
+button[type="button"]:hover {
+  background-color: var(--hover-color); /* Hover effect */
+  color: white; /* Ensure text stays visible */
 }
 
 /* Specific Section Styles */
 .signIn, .logIn {
+  
   display: flex; /* Flexible layout */
   flex-direction: column; /* Stacks items vertically */
   align-items: center; /* Centers content horizontally */
@@ -241,6 +268,7 @@ nav .menu {
 
 
 .logorsignin {
+  
   color: white;
   display: flex; /* Enables flexible positioning */
   justify-content: flex-end; /* Pushes content to the right */
@@ -256,3 +284,7 @@ nav .menu {
   gap: 10px; /* Adds space between buttons */
 }
 
+#welcomePrem {
+  height: 90vh;
+
+}
