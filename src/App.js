@@ -4,7 +4,33 @@
 import React, { useState } from 'react';
 import Header from './app.jsx';
 
+const handleSignUp = async (event) => {
+  event.preventDefault();
 
+  const email = document.getElementById('newUsername').value;
+  const password = document.getElementById('newPassword').value;
+  const username = email.split('@')[0]; // Example logic to derive a username
+
+  try {
+    const response = await fetch('http://localhost:5001/signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, username, password }),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      alert(data.message);
+    } else {
+      console.error(data);
+      alert(`Sign-up failed: ${data.message}`);
+    }
+  } catch (error) {
+    console.error('Error during sign-up:', error);
+    alert('Sign-up failed: Could not connect to the server.');
+  }
+};
 
 function App() {
   // Keeps track of whether the user clicks sign in or log in
@@ -41,7 +67,7 @@ function App() {
                 <span className="msg">Password must be strong</span>
               </div>
 
-              <button type="submit" className="login-button">Sign Up</button>
+              <button type="submit" className="login-button" onClick={handleSignUp}>Sign Up</button>
             </form>
            
           </div>

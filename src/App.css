@@ -236,7 +236,7 @@ button[type="button"] {
 
 button[type="button"]:hover {
   background-color: var(--hover-color); /* Hover effect */
-  color: white; /* Ensure text stays visible */
+  color: var(--button-text-color);
 }
 
 /* Specific Section Styles */
@@ -286,5 +286,6 @@ button[type="button"]:hover {
 
 #welcomePrem {
   height: 90vh;
-
+  font-size: 24px;
+  
 }
