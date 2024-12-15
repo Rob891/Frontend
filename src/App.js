@@ -4,6 +4,7 @@
 import React, { useState } from 'react';
 import Header from './app.jsx';
 
+
 const handleSignUp = async (event) => {
   event.preventDefault();
 
@@ -32,6 +33,7 @@ const handleSignUp = async (event) => {
   }
 };
 
+
 function App() {
   // Keeps track of whether the user clicks sign in or log in
   const [mode, setMode] = useState("normal");
@@ -43,12 +45,21 @@ function App() {
 
       {/* Render content based on the mode */}
       <div className="content">
+
         {mode === "normal" && <h1 id = "welcomePrem">Welcome to Premier League Fantasy!</h1>}
        
       <div>
         {mode === "signingIn" && (
           <div className="fullscreen-container">
             <h1 id="login-title">Sign Up</h1>
+
+        {mode === "normal" && <h2>Welcome to Premier League Fantasy!</h2>
+        
+        }
+        
+        {mode === "signingIn" && (
+          <div className="fullscreen-container">
+            <h1 className="login-title">Sign Up</h1>
             <form className="form">
               <div className="input-group">
                 <label htmlFor="newUsername"><b>New Username</b></label>
@@ -70,13 +81,32 @@ function App() {
               <button type="submit" className="login-button" onClick={handleSignUp}>Sign Up</button>
             </form>
            
+
+                <input
+                  type="password"
+                  placeholder="Enter New Password"
+                  id="newPassword"
+                  required
+                />
+                <span className="msg">Password must be strong</span>
+              </div>
+
+              <button type="submit" className="login-button">Sign Up</button>
+            </form>
+            <button type="button" onClick={() => setMode("normal")}>
+              Go Back
+            </button>
+
           </div>
         )}
 
         {mode === "loggingIn" && (
           <div className="fullscreen-container">
 
+
             <h1 id="login-title">Welcome</h1>
+
+            <h1 className="login-title">Welcome</h1>
 
             <form className="form">
 
@@ -92,11 +122,21 @@ function App() {
 
               <div className="input-group">
                 <label htmlFor="password"><b>Password</b></label>
+
                 <input type="password" placeholder="Enter Password" id="password" required/>
+
+                <input
+                  type="password"
+                  placeholder="Enter Password"
+                  id="password"
+                  required
+                />
+
                 <span className="msg">Incorrect Password</span>
               </div>
 
               <button type="submit" className="login-button">Log In</button>
+
 
             </form>
             
@@ -105,6 +145,14 @@ function App() {
         )}
 
         </div>
+
+            </form>
+            <button type="button" onClick={() => setMode("normal")}>
+              Go Back
+            </button>
+          </div>
+        )}
+
       </div>
     </div>
   );
