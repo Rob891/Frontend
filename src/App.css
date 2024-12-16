@@ -190,6 +190,7 @@ nav .menu {
   border: 1px solid #ccc; /* Light gray border */
   border-radius: 5px; /* Rounded corners for inputs */
   font-size: 14px; /* Font size for input text */
+  color: black;
   
 }
 
