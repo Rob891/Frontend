@@ -12,7 +12,7 @@ function App() {
   const [errorMessage, setErrorMessage] = useState(""); 
   const [successMessage, setSuccessMessage] = useState(""); 
 
-  // Handle Login API Call
+  // handles login
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -38,7 +38,7 @@ function App() {
     }
   };
 
-  // Handle Sign-Up API Call
+  // handles regestration
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
