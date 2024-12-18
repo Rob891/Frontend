@@ -1,262 +1,285 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
-
-
 * {
-  font-family: "Open Sans", sans-serif; 
+  font-family: "Open Sans", sans-serif;
   padding: 0;
   margin: 0;
-  box-sizing: border-box; 
+  box-sizing: border-box;
   color: white;
 }
-
 
 :root {
   --primary-color: #1a202c; /* Deep Navy */
   --secondary-color: #e53e3e; /* Vivid Red */
   --background-color: #2d3748; /* Charcoal Gray */
+  --button-text-color: #edf2f7; /* Off-White */
   --text-color: #edf2f7; /* Off-White */
   --hover-color: #c53030; /* Deep Red */
 }
 
-
+/* General Content Styling */
 .content {
   background-color: var(--primary-color);
   height: 100vh;
-  width: 100 vw;
-  background-size: cover;
-  background-position: center;
+  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
 }
 
-
+/* Header Section */
 .Head1 {
   background-color: var(--primary-color);
-  padding: 20px 0; /* Vertical spacing in header */
-  color: white; 
+  padding: 20px 0;
 }
 
 .logo-name {
-  /* Prem fantasy logo/header */
-  font-size: 24px; 
+  font-size: 24px;
   font-weight: bold;
   margin: 0 10px;
-  color: white; 
+  color: var(--text-color);
 }
 
-/* Nav menu */
+/* Navigation Menu */
 nav .menu {
-  
-
-
-
-  /* Aligns items horizontally */
-  display: flex; 
-  align-items: center; 
+  display: flex;
+  align-items: center;
   gap: 10px;
- 
 }
 
-
-/* nav bar links */
 .menu .links {
-  
-  padding: 6px 15px;
-  border-radius: 50px;
-  transition: background-color 0.3s ease;
-
-  display: flex; 
-  list-style:none; 
+  display: flex;
+  list-style: none;
   gap: 15px;
-  
-
 }
-
-
 
 .menu .links li {
-
   text-decoration: none;
   font-size: 14px;
   font-weight: 600;
   color: var(--secondary-color);
   letter-spacing: 1.5px;
   transition: color 0.3s ease;
-
-  
 }
 
 .menu .links li a {
-  text-decoration:none; /* Removes underline from links */
-  font-size: 14px; /* Font size for links */
-  font-weight: 600; /* Slightly bold text for visibility */
-  color: var(--secondary-color); /* Gold color for links */
-  letter-spacing: 1.5px; /* Adds spacing between letters */
-  transition: color 0.3s ease; /* Smooth color transition on hover */
-  
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--secondary-color);
+  letter-spacing: 1.5px;
+  transition: color 0.3s ease;
 }
 
 .menu .links li a:hover {
-  background-color: var(--hover-color); /* Navy hover effect for links */
-  
+  background-color: var(--background-color);
+}
+
+/* Logo Container */
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  width: 100%;
+}
+
+.logo {
+  font-size: 24px;
+  color: var(--primary-color);
+}
+
+.logorsignin {
+  display: flex; /* Enables flexible layout for the buttons */
+  justify-content: flex-end; /* Aligns buttons to the right */
+  align-items: center; /* Vertically centers buttons */
+  gap: 20px; /* Adds space between the buttons */
+  position: fixed; /* Keeps the buttons fixed in position */
+  right: 20px; /* Distance from the right edge */
+  top: 20px; /* Distance from the top edge */
+  z-index: 10; /* Ensures the buttons stay above other elements */
 }
 
 
 
 
-/* Button Styles */
-#SignIn, #login-button, #GoBack {
 
-  justify-content: right;
-  align-items: right; /* Centers text and icons vertically */
-  text-align: right; 
-  background-color: var(--hover-color); /* Navy background for buttons */
-  border: 0; /* Removes default border */
-  border-radius: 100px; /* Circular edges for buttons */
-  color: var(--secondary-color); /* White text */
-  cursor: pointer; /* Pointer cursor on hover */
-   /* Inline and flexible layout for buttons */
-  font-size: 16px; /* Font size for button text */
-  font-weight: 600; /* Bold text for emphasis */
-  padding: 10px 20px; /* Inner spacing for buttons */
-  text-align: right; 
-  transition: background-color 0.3s ease, color 0.3s ease; 
-
- 
+/* User Buttons */
+#SignIn,
+#login-button,
+#GoBack {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: var(--hover-color);
+  border: 0;
+  border-radius: 100px;
+  color: var(--button-text-color);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 10px 20px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
-
 
 #SignIn:hover,
 #login-button:hover,
 #GoBack:hover {
-  background-color: #16437E; /* Darker navy on hover */
-  color: #ffffff; /* White text */
+  background-color: #16437E;
+  color: #ffffff;
 }
 
-/* Form Container Styles */
+/* Fullscreen Form Container */
 .fullscreen-container {
-  display: flex; /* Centers content horizontally */
-  flex-direction: column; /* Stacks items vertically */
-  justify-content: center; /* Centers content vertically */
-  align-items: center; /* Aligns items in the center */
-  background-color: var(--secondary-color); /* Gold background for the container */
-  height: 100vh; /* Full viewport height */
-  width: 100vw; /* Full viewport width */
-  padding: 20px; /* Adds spacing inside the container */
-  
-
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--background-color);
+  height: 100vh;
+  width: 100vw;
+  padding: 20px;
 }
 
-/* Box Design for Forms */
-.form-box {
-  background-color: white; /* White background for the form */
-  padding: 20px; /* Inner spacing for the form box */
-  border-radius: 10px; /* Rounded edges for the form box */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
-  max-width: 400px; /* Maximum width for the box */
-  width: 100%; /* Full width within the max constraint */
-  text-align: center; /* Centers text alignment */
-  
- 
+.fullscreen-container h1 {
+  text-align: center;
+  display: flex;
+  font-weight: bold;
 }
 
-.form-box h1 {
-  font-size: 24px; /* Title font size */
-  margin-bottom: 20px; /* Space below the title */
-  color: var(--primary-color); /* Navy title color */
-  
+/* Form Styling */
+.form {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
 }
 
-/* Input Group Styles */
 .input-group {
-  display: flex; /* Flexible layout for stacking label and input */
-  flex-direction: column; /* Ensures label and input stack vertically */
-  margin-bottom: 15px; /* Space below each input group */
-  
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  text-align: left;
 }
 
 .input-group label {
-  font-weight: bold; /* Bold text for labels */
-  margin-bottom: 5px; /* Space below the label */
-  color: white; /* Dark gray text */
-  
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: var(--text-color);
 }
 
 .input-group input {
-  padding: 10px; /* Inner padding for the input */
-  border: 1px solid #ccc; /* Light gray border */
-  border-radius: 5px; /* Rounded corners for inputs */
-  font-size: 14px; /* Font size for input text */
-  color: black;
-  
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
-.input-group .msg {
-  font-size: 12px; /* Small font for messages */
-  color: #888; /* Light gray text for messages */
-  
+.input-group input:focus {
+  border-color: var(--hover-color);
+  outline: none;
 }
 
-/* Button in Forms */
+.msg {
+  font-size: 12px;
+  color: #e53e3e;
+  margin-top: 5px;
+}
+
+/* Form Buttons */
 .login-button {
-  background-color: var(--primary-color); /* Navy background for buttons */
-  color: white; /* White text */
-  padding: 10px; /* Inner spacing for buttons */
-  border: none; /* Removes default border */
-  border-radius: 5px; /* Rounded corners for buttons */
-  cursor: pointer; /* Pointer cursor on hover */
-  transition: background-color 0.3s ease; /* Smooth background transition */
-  
+  background-color: var(--secondary-color);
+  color: var(--button-text-color);
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  width: 100%;
+  transition: background-color 0.3s ease;
 }
 
 .login-button:hover {
-  background-color: var(--hover-color); /* Lighter navy on hover */
-  
+  background-color: var(--hover-color);
 }
 
-/* Specific Section Styles */
-.signIn, .logIn {
-  display: flex; /* Flexible layout */
-  flex-direction: column; /* Stacks items vertically */
-  align-items: center; /* Centers content horizontally */
-  margin: auto; /* Centers the form box */
-  
+button[type="button"] {
+  margin-top: 10px;
+  color: var(--button-text-color);
+  background-color: var(--primary-color);
+  padding: 10px;
+  border: 1px solid var(--hover-color);
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-.logo-container {
-  display: flex; /* Enables flexbox for horizontal alignment */
-  align-items: center; /* Vertically centers items inside the container */
-  justify-content: space-between; /* Distributes space evenly between the logo and buttons */
-  padding: 10px; /* Optional padding for spacing around the container */
-  position: relative; /* Ensures the container respects its parent's positioning */
-  width: 100%; /* Makes the container span the full width of the parent */
-  
+button[type="button"]:hover {
+  background-color: var(--hover-color);
+  color: var(--button-text-color);
 }
 
-.logo {
-  font-size: 24px; /* Adjusts the size of the logo if necessary */
-  color: var(--primary-color); /* Matches the theme */
-  text-decoration: none; /* Removes underline for links, if applicable */
-  
+.dashboard {
+  text-align: center;
+  margin: 50px auto;
+  padding: 20px;
+  max-width: 800px;
+  border-radius: 10px;
+  background-color: var(--background-color); /* Use existing color variables */
+  color: var(--text-color);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-
-.logorsignin {
-  color: white;
-  display: flex; /* Enables flexible positioning */
-  justify-content: flex-end; /* Pushes content to the right */
-  align-items: center; /* Aligns items vertically */
-  padding: 10px 20px; /* Optional spacing inside the container */
-  position: absolute; /* Allows the container to be placed in the corner */
-  margin-right: 10px;
-  top: 5; /* Aligns the container to the top */
-  right: 0; /* Aligns the container to the right */
-  z-index: 0;
-  display: flex; /* Enables flexbox for the buttons */
-  justify-content: flex-end; /* Aligns buttons to the right */
-  gap: 10px; /* Adds space between buttons */
+.dashboard h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
 }
 
+.dashboard p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.dashboard button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: var(--secondary-color);
+  color: var(--button-text-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.dashboard button:hover {
+  background-color: var(--hover-color);
+}
+
+/* Sign Out and See Team Buttons */
+#sign-out,
+#see-team {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: var(--secondary-color); /* Vivid Red */
+  border: 0;
+  border-radius: 100px;
+  color: var(--button-text-color); /* Off-White */
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 10px 20px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#sign-out:hover,
+#see-team:hover {
+  background-color: var(--hover-color); /* Deep Red */
+  color: #ffffff;
+}

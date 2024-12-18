@@ -1,18 +1,21 @@
 import './App.css';
 import React, { useState } from 'react';
 import Header from './app.jsx';
+import LoginForm from './Loginform.jsx';
+import SignUpForm from './SignUpForm.jsx';
+import Dashboard from './Dashboard.jsx';
 
 function App() {
-  const [mode, setMode] = useState("normal"); 
+  const [mode, setMode] = useState("normal");
   const [formData, setFormData] = useState({
     email: "",
     username: "",
     password: "",
-  }); 
-  const [errorMessage, setErrorMessage] = useState(""); 
-  const [successMessage, setSuccessMessage] = useState(""); 
+  });
+  const [loggedInUser, setLoggedInUser] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
-  // handles login
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -20,15 +23,16 @@ function App() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          identifier: formData.email, 
+          identifier: formData.email,
           password: formData.password,
         }),
       });
 
       if (response.ok) {
         const data = await response.json();
+        setLoggedInUser(data.user);
         setSuccessMessage(`Welcome back, ${data.user.username}!`);
-        setMode("normal"); 
+        setMode("dashboard");
       } else {
         const error = await response.json();
         setErrorMessage(error.error || "Failed to log in.");
@@ -38,7 +42,6 @@ function App() {
     }
   };
 
-  // handles regestration
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
@@ -53,8 +56,11 @@ function App() {
       });
 
       if (response.ok) {
-        setSuccessMessage("Registration successful! Please log in.");
-        setMode("loggingIn"); 
+        const data = await response.json();
+        setLoggedInUser(data.user);
+        setSuccessMessage("Registration successful! Redirecting to dashboard...");
+        setMode("dashboard");
+      } else {
         const error = await response.json();
         setErrorMessage(error.error || "Failed to register.");
       }
@@ -63,104 +69,56 @@ function App() {
     }
   };
 
-  
   const handleInputChange = (e) => {
     const { id, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [id]: value, 
+      [id]: value,
     }));
+  };
+
+  const handleLogout = () => {
+    setLoggedInUser(null);
+    setMode("normal");
+    setSuccessMessage("You have been logged out.");
   };
 
   return (
     <div className="App">
-      <Header mode={mode} setMode={setMode} />
+      <Header 
+        mode={mode} 
+        setMode={setMode} 
+        username={loggedInUser?.username || "User"} 
+        setLoggedInUser={setLoggedInUser} 
+        handleLogout={handleLogout}
+      />
 
       <div className="content">
         {mode === "normal" && <h2>Welcome to Premier League Fantasy!</h2>}
 
         {mode === "signingIn" && (
-          <div className="fullscreen-container">
-            <h1 className="login-title">Sign Up</h1>
-            <form className="form" onSubmit={handleSignUp}>
-              <div className="input-group">
-                <label htmlFor="email"><b>Email</b></label>
-                <input
-                  type="email"
-                  placeholder="Enter Email"
-                  id="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-
-              <div className="input-group">
-                <label htmlFor="username"><b>Username</b></label>
-                <input
-                  type="text"
-                  placeholder="Enter Username"
-                  id="username"
-                  value={formData.username}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-
-              <div className="input-group">
-                <label htmlFor="password"><b>Password</b></label>
-                <input
-                  type="password"
-                  placeholder="Enter Password"
-                  id="password"
-                  value={formData.password}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-
-              <button type="submit" className="login-button">Sign Up</button>
-            </form>
-            <button type="button" onClick={() => setMode("normal")}>
-              Go Back
-            </button>
-          </div>
+          <SignUpForm
+            formData={formData}
+            handleInputChange={handleInputChange}
+            handleSignUp={handleSignUp}
+            setMode={setMode}
+          />
         )}
 
         {mode === "loggingIn" && (
-          <div className="fullscreen-container">
-            <h1 className="login-title">Log In</h1>
-            <form className="form" onSubmit={handleLogin}>
-              <div className="input-group">
-                <label htmlFor="email"><b>Email or Username</b></label>
-                <input
-                  type="text"
-                  placeholder="Enter Email or Username"
-                  id="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
+          <LoginForm
+            formData={formData}
+            handleInputChange={handleInputChange}
+            handleLogin={handleLogin}
+            setMode={setMode}
+          />
+        )}
 
-              <div className="input-group">
-                <label htmlFor="password"><b>Password</b></label>
-                <input
-                  type="password"
-                  placeholder="Enter Password"
-                  id="password"
-                  value={formData.password}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-
-              <button type="submit" className="login-button">Log In</button>
-            </form>
-            <button type="button" onClick={() => setMode("normal")}>
-              Go Back
-            </button>
-          </div>
+        {mode === "dashboard" && (
+          <Dashboard
+            username={loggedInUser?.username || "User"}
+            userId={loggedInUser?.user_id || null}
+          />
         )}
       </div>
 
