@@ -9,15 +9,15 @@
 }
 
 :root {
-  --primary-color: #1a202c; /* Deep Navy */
-  --secondary-color: #e53e3e; /* Vivid Red */
-  --background-color: #2d3748; /* Charcoal Gray */
-  --button-text-color: #edf2f7; /* Off-White */
-  --text-color: #edf2f7; /* Off-White */
-  --hover-color: #c53030; /* Deep Red */
+  --primary-color: #1a202c; 
+  --secondary-color: #e53e3e; 
+  --background-color: #2d3748; 
+  --button-text-color: #edf2f7; 
+  --text-color: #edf2f7; 
+  --hover-color: #c53030; 
 }
 
-/* General Content Styling */
+
 .content {
   background-color: var(--primary-color);
   height: 100vh;
@@ -27,7 +27,6 @@
   align-items: center;
 }
 
-/* Header Section */
 .Head1 {
   background-color: var(--primary-color);
   padding: 20px 0;
@@ -40,7 +39,6 @@
   color: var(--text-color);
 }
 
-/* Navigation Menu */
 nav .menu {
   display: flex;
   align-items: center;
@@ -90,14 +88,14 @@ nav .menu {
 }
 
 .logorsignin {
-  display: flex; /* Enables flexible layout for the buttons */
-  justify-content: flex-end; /* Aligns buttons to the right */
-  align-items: center; /* Vertically centers buttons */
-  gap: 20px; /* Adds space between the buttons */
-  position: fixed; /* Keeps the buttons fixed in position */
-  right: 20px; /* Distance from the right edge */
-  top: 20px; /* Distance from the top edge */
-  z-index: 10; /* Ensures the buttons stay above other elements */
+  display: flex; 
+  justify-content: flex-end; 
+  align-items: center; 
+  gap: 20px; 
+  position: fixed; 
+  right: 20px; 
+  top: 20px; 
+  z-index: 10; 
 }
 
 
@@ -250,30 +248,30 @@ button[type="button"]:hover {
 .dashboard button:hover {
   background-color: var(--hover-color);
 }
-/* Header Button Styles */
+
 .header-button {
-  background-color: var(--secondary-color); /* Matches vivid red */
-  color: var(--button-text-color); /* Matches off-white */
-  padding: 10px 20px; /* Consistent button size */
-  border: none; /* No borders */
-  border-radius: 100px; /* Rounded edges */
-  cursor: pointer; /* Pointer cursor on hover */
-  font-size: 16px; /* Text size */
-  font-weight: 600; /* Bold text */
-  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transitions */
+  background-color: var(--secondary-color); 
+  color: var(--button-text-color); 
+  padding: 10px 20px; 
+  border: none; 
+  border-radius: 100px; 
+  cursor: pointer;
+  font-size: 16px; 
+  font-weight: 600; 
+  transition: background-color 0.3s ease, color 0.3s ease; 
 }
 
 .header-button:hover {
-  background-color: var(--hover-color); /* Darker red on hover */
-  color: var(--text-color); /* Ensure contrast */
+  background-color: var(--hover-color); 
+  color: var(--text-color); 
 }
-/* Full-Screen Dashboard Container */
+
 .dashboard {
-  position: relative; /* For absolute positioning of the standings widget */
+  position: relative; 
   background-color: var(--primary-color);
   color: var(--text-color);
-  height: 100vh; /* Full viewport height */
-  width: 100vw; /* Full viewport width */
+  height: 100vh; 
+  width: 100vw; 
   display: flex;
   flex-direction: column;
   padding: 0;
@@ -282,46 +280,44 @@ button[type="button"]:hover {
 
 
 
-/* Main Content - Centered in the Remaining Space */
+
 .main-content {
-  flex: 1; /* Allows it to take the remaining space */
+  flex: 1; 
   display: flex;
-  justify-content: center; /* Center vertically */
-  align-items: center; /* Center horizontally */
+  justify-content: center; 
+  align-items: center; 
   text-align: center;
   padding: 20px;
-  width: 100%; /* Take the full width of the viewport */
+  width: 100%; 
   box-sizing: border-box;
 }
 
-/* Standings Widget - Top Left, Wider and Shorter */
 .standings-container {
   position: absolute;
-  top: 10px; /* Distance from the top */
-  left: 10px; /* Distance from the left */
-  width: 500px; /* Adjust width to make it wider */
-  height: 250px; /* Adjust height to make it shorter */
-  background-color: var(--background-color); /* Consistent background */
-  border-radius: 8px; /* Rounded corners */
-  padding: 10px; /* Inner spacing */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Soft shadow for elevation */
-  z-index: 10; /* Ensure it stays on top */
-  overflow: auto; /* Scroll if content exceeds height */
+  top: 10px; 
+  left: 10px; 
+  width: 500px; 
+  height: 250px; 
+  background-color: var(--background-color); 
+  border-radius: 8px; 
+  padding: 10px; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); 
+  z-index: 10; 
+  overflow: auto; 
 }
 
-/* Standings Table */
 .standings-table {
-  width: 100%; /* Full width of the container */
+  width: 100%; 
   color: var(--text-color);
-  border-collapse: collapse; /* Remove table gaps */
+  border-collapse: collapse; 
 }
 
 .standings-table th,
 .standings-table td {
   font-size: 12px;
   text-align: center;
-  padding: 4px 8px; /* Adjust padding for compactness */
-  background: transparent; /* No default background */
+  padding: 4px 8px; 
+  background: transparent; 
 }
 
 .standings-table th {
@@ -330,7 +326,7 @@ button[type="button"]:hover {
 
 .standings-table td:nth-child(2),
 .standings-table th:nth-child(2) {
-  text-align: left; /* Align team names to the left */
+  text-align: left; 
 }
 .team-page {
   padding: 20px;
@@ -376,14 +372,12 @@ button[type="button"]:hover {
 .fetch-all-players-button:hover {
   background-color: #0056b3;
 }
-
-/* Scrollable player container */
 .player-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid */
   gap: 20px;
-  max-height: 400px; /* Fixed height */
-  overflow-y: auto; /* Scrollable vertically */
+  max-height: 400px; 
+  overflow-y: auto; 
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 8px;
