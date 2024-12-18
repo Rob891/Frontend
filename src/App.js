@@ -138,8 +138,8 @@ function App() {
 
         {/* Routing */}
         <Routes>
-        <Route path="/" element={<h1>Home Page</h1>} />
-        <Route path="/team" element={<Team />} />
+          <Route path="/" element={<h1>Home Page</h1>} />
+          <Route path="/team" element={<Team />} />
         </Routes>
 
         {/* Error and success messages */}
