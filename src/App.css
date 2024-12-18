@@ -246,6 +246,7 @@ nav .menu {
   display: flex;
   justify-content: center;
   height: 100vh;
+  text-align: center;
    /* Size for the title */
   font-weight: bold; /* Makes the title bold */
   color: var(--text-color); /* Title text color */
