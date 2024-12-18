@@ -266,6 +266,7 @@ nav .menu {
   font-weight: bold; /* Bold text for labels */
   margin-bottom: 5px; /* Adds spacing below the label */
   color: var(--text-color); /* Label color */
+  text-align: center;
 }
 
 .input-group input {
