@@ -1,0 +1,113 @@
+
+:root {
+    --primary-color: #1a202c; 
+    --secondary-color: #e53e3e; 
+    --background-color: #2d3748; 
+    --button-text-color :#edf2f7;
+    --text-color: #edf2f7; 
+    --hover-color: #c53030; 
+  }
+
+
+.team-page {
+    
+    background-color: var(--background-color); /* Team page background color */
+    height: 150vh; /* Full viewport height */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    
+}
+  
+
+
+.teamPageHead {
+    margin-top: 20px;
+    font-size: 2.5rem;
+    color: white;
+    background-color: var(--background-color);
+    
+}
+
+  
+.new-team-btn {
+    margin-top: 15px;
+    background-color:var(--hover-color);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+  
+.new-team-btn:hover {
+    background-color: white;
+}
+
+  
+.player-slots {
+    display: flex;
+    flex-direction: row; /* Stack label and input vertically */
+    flex-wrap: wrap;
+    
+    align-items: center; /* Center content horizontally */
+    justify-content: center; /* Center content vertically */
+    border: 1px solid #000000; /* Add a border around each box */
+
+    border-radius: 8px; /* Optional: Rounded corners */
+    padding: 10px; /* Space inside the box */
+
+    background-color:#238729; /* Light background color */
+
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+
+    width: 1000px; /* Set a fixed width for the box */
+    height: 800px; /* Optional: Set a height for consistency */
+    margin: 20px; /* Add spacing between boxes */
+
+}
+  
+.player-slot {
+
+    display: flex;
+    flex-direction: row; /* Stack label and input vertically */
+
+    align-items: center; /* Center content horizontally */
+    justify-content: center; /* Center content vertically */
+
+    border: 1px #ccc; /* Add a border around each box */
+    border-radius: 8px; /* Optional: Rounded corners */
+
+    padding: 10px; /* Space inside the box */
+    background-color: #238729; /* Light background color */
+
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+
+    width: 150px; /* Set a fixed width for the box */
+    height: 75px; /* Optional: Set a height for consistency */
+    margin: 40px; /* Add spacing between boxes */
+
+}
+  
+.player-slot label {
+    
+    margin-right: 10px;   
+    font-weight: bold;
+    background-color: #238729;
+
+}
+  
+.player-slot input {
+    background-color: white;
+    width: 100%; /* Make input fill the box width */
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+

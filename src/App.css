@@ -3,34 +3,47 @@
 
 
 * {
+  background-color: #1a202c;
   font-family: "Open Sans", sans-serif; 
   padding: 0;
   margin: 0;
   box-sizing: border-box; 
-  color: white;
+  
 }
 
 
 :root {
-  --primary-color: #1a202c; /* Deep Navy */
-  --secondary-color: #e53e3e; /* Vivid Red */
-  --background-color: #2d3748; /* Charcoal Gray */
+  --primary-color: #1a202c; 
+  --secondary-color: #e53e3e; 
+  --background-color: #2d3748; 
   --button-text-color :#edf2f7;
-  --text-color: #edf2f7; /* Off-White */
-  --hover-color: #c53030; /* Deep Red */
+  --text-color: #edf2f7; 
+  --hover-color: #c53030; 
 }
 
 
+/* Ensure the entire page has a consistent background */
+body, html {
+  height: 100%; /* Full height for background */
+  width: 100%; /* Full width for background */
+  background-color: var(--primary-color); /* Consistent background */
+  margin: 0;
+  padding: 0;
+}
+
+/* Center align the content container */
 .content {
-  background-color: var(--primary-color);
-  height: 100vh;
-  width: 100 vw;
-  background-size: cover;
-  background-position: center;
+  
+  color: var(--text-color);
   display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
+  flex-direction: column; /* Stack content vertically */
+  align-items: center; /* Center horizontally */
+  justify-content: center; /* Center vertically */
+  background-color: var(--background-color); /* Consistent background color */
+  min-height: 100vh; /* Full viewport height */
+  padding: 20px; /* Add some spacing */
+  margin: 0; /* Remove unwanted margin */
+  box-sizing: border-box; /* Include padding in layout */
 }
 
 
@@ -38,6 +51,21 @@
   background-color: var(--primary-color);
   padding: 20px 0; /* Vertical spacing in header */
   color: white; 
+  
+}
+
+.welcomePrem {
+
+  background-color: var(--background-color);
+  font: bold;
+
+  min-height: 90vh;
+  width: 100%; /* Full width of the screen */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+
 }
 
 .logo-name {
@@ -46,15 +74,55 @@
   font-weight: bold;
   margin: 0 10px;
   color: white; 
+  
+  
+}
+
+/* Remove unnecessary gaps between links and log in buttons */
+.menu {
+  display: flex;
+  justify-content: space-between; /* Push links to the left and buttons to the right */
+  align-items: center; /* Align vertically in the center */
+  padding: 0 20px; /* Add padding around the navigation */
+  width: 100%; /* Make menu span full width */
+  box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.links {
+  list-style: none; /* Remove default list styling */
+  display: flex;
+  gap: 20px; /* Add consistent spacing between links */
+  margin: 0;
+  padding: 0;
+}
+
+.links li a {
+  text-decoration: none; /* Remove underline from links */
+  font-size: 16px; /* Slightly larger text for links */
+  font-weight: 600; /* Bold links */
+  color: var(--secondary-color); /* Match theme color */
+  transition: color 0.3s ease;
+}
+
+.links li a:hover {
+  color: var(--hover-color); /* Change color on hover */
+}
+
+.logorsignin {
+  display: flex;
+  gap: 15px; /* Add consistent spacing between buttons */
+  align-items: center; /* Align buttons vertically */
+  justify-content: flex-end; /* Align buttons to the right */
+  position: relative; /* Ensure proper positioning */
 }
 
 /* Nav menu */
 nav .menu {
-
-  /* Aligns items horizontally */
+  
   display: flex; 
   align-items: center; 
   gap: 10px;
+  
 }
 
 
@@ -85,6 +153,7 @@ nav .menu {
 
   
 }
+
 
 .menu .links li a {
   text-decoration:none; /* Removes underline from links */
@@ -131,22 +200,32 @@ nav .menu {
 
 /* Form Container Styles */
 /* Fullscreen container for both forms */
+.logorsignin {
+  
+  display: flex; /* Enables flexbox for horizontal alignment */
+  justify-content: flex-end; /* Align buttons to the right */
+  align-items: center; /* Align buttons vertically */
+  width: 100%; /* Ensure it spans the full width of the screen */
+  padding: 10px 20px; /* Add padding for spacing */
+  background-color: var(--primary-color); /* Match the theme */
+  position: absolute; /* Position it above the form */
+ 
+}
+
+/* Adjust the fullscreen container to account for the logorsignin */
 .fullscreen-container {
-  display: flex; /* Centers the content */
-  justify-content: center; /* Horizontally centers forms */
-  align-items: center; /* Vertically centers forms */
-  background-color: var(--background-color); /* Background for the whole section */
+
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center; /* Center everything horizontally */
+  justify-content: center; /* Center everything vertically */
+   background-color: var(--background-color);
   height: 100vh; /* Full viewport height */
   width: 100vw; /* Full viewport width */
-  padding: 20px; /* Adds spacing inside the container */
+
 }
 
-.fullscreen-container h1 {
-  text-align: center;
-  display: flex;
-}
-
-/* Form box styling */
+/* Form box styling remains unchanged */
 .form {
   background-color: var(--primary-color); /* Solid background for the form box */
   color: var(--text-color); /* Text color inside the form */
@@ -158,12 +237,15 @@ nav .menu {
   text-align: center; /* Centers the text */
 }
 
+
 /* Form titles */
 #login-title {
+  
+
   position:absolute;
   display: flex;
   justify-content: center;
-  height: 60vh;
+  height: 100vh;
    /* Size for the title */
   font-weight: bold; /* Makes the title bold */
   color: var(--text-color); /* Title text color */
@@ -172,6 +254,7 @@ nav .menu {
 
 /* Input group styling */
 .input-group {
+  
   display: flex; /* Stacks label and input */
   flex-direction: column; /* Ensures vertical stacking */
   margin-bottom: 20px; /* Spacing between input fields */
@@ -185,6 +268,7 @@ nav .menu {
 }
 
 .input-group input {
+  
   padding: 10px; /* Inner spacing for inputs */
   border: 1px solid #ccc; /* Light border for inputs */
   border-radius: 5px; /* Rounded corners for inputs */
@@ -194,12 +278,14 @@ nav .menu {
 }
 
 .input-group input:focus {
+  
   border-color: var(--hover-color); /* Highlighted border on focus */
   outline: none; /* Removes default focus outline */
 }
 
 /* Validation message styling */
 .msg {
+  
   font-size: 12px; /* Smaller font for validation messages */
   color: #e53e3e; /* Red color for validation messages */
   margin-top: 5px; /* Spacing above the message */
@@ -225,6 +311,7 @@ nav .menu {
 
 /* Go Back button styling */
 button[type="button"] {
+  
   margin-top: 10px; /* Adds spacing above the button */
   color: var(--button-text-color); /* White text for the Go Back button */
   background-color: var(--primary-color); /* Matches the form background */
@@ -235,13 +322,14 @@ button[type="button"] {
 }
 
 button[type="button"]:hover {
+  
   background-color: var(--hover-color); /* Hover effect */
   color: var(--button-text-color);
 }
 
 /* Specific Section Styles */
 .signIn, .logIn {
-  
+
   display: flex; /* Flexible layout */
   flex-direction: column; /* Stacks items vertically */
   align-items: center; /* Centers content horizontally */
@@ -284,8 +372,15 @@ button[type="button"]:hover {
   gap: 10px; /* Adds space between buttons */
 }
 
-#welcomePrem {
-  height: 90vh;
-  font-size: 24px;
-  
+
+
+.new-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
 }
+
+
+
+

@@ -2,111 +2,152 @@
 // import { render } from 'ejs';
 
 import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './app.jsx';
 
-const handleSignUp = async (event) => {
-  event.preventDefault();
+import Team from './pages/Team';
 
-  const email = document.getElementById('newUsername').value;
-  const password = document.getElementById('newPassword').value;
-  const username = email.split('@')[0]; // Example logic to derive a username
-
-  try {
-    const response = await fetch('http://localhost:5001/signup', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, username, password }),
-    });
-
-    const data = await response.json();
-
-    if (response.ok) {
-      alert(data.message);
-    } else {
-      console.error(data);
-      alert(`Sign-up failed: ${data.message}`);
-    }
-  } catch (error) {
-    console.error('Error during sign-up:', error);
-    alert('Sign-up failed: Could not connect to the server.');
-  }
-};
+import LoginForm from './Loginform.jsx';
+import SignUpForm from './SignUpForm.jsx';
+import Dashboard from './Dashboard.jsx';
 
 function App() {
-  // Keeps track of whether the user clicks sign in or log in
   const [mode, setMode] = useState("normal");
+  const [formData, setFormData] = useState({
+    email: "",
+    username: "",
+    password: "",
+  });
+  const [loggedInUser, setLoggedInUser] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+
+  // Handle Login
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("http://localhost:5001/users/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          identifier: formData.email,
+          password: formData.password,
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setLoggedInUser(data.user);
+        setSuccessMessage(`Welcome back, ${data.user.username}!`);
+        setMode("dashboard");
+      } else {
+        const error = await response.json();
+        setErrorMessage(error.error || "Failed to log in.");
+      }
+    } catch (err) {
+      setErrorMessage("An error occurred. Please try again.");
+    }
+  };
+
+  // Handle Sign Up
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("http://localhost:5001/users/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: formData.email,
+          username: formData.username,
+          password: formData.password,
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setLoggedInUser(data.user);
+        setSuccessMessage("Registration successful! Redirecting to dashboard...");
+        setMode("dashboard");
+      } else {
+        const error = await response.json();
+        setErrorMessage(error.error || "Failed to register.");
+      }
+    } catch (err) {
+      setErrorMessage("An error occurred. Please try again.");
+    }
+  };
+
+  // Handle Input Changes
+  const handleInputChange = (e) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [id]: value,
+    }));
+  };
+
+  // Handle Logout
+  const handleLogout = () => {
+    setLoggedInUser(null);
+    setMode("normal");
+    setSuccessMessage("You have been logged out.");
+  };
 
   return (
-    <div className="App">
-      {/* Pass mode and setMode to Header */}
-      <Header mode={mode} setMode={setMode} />
+    <BrowserRouter>
+      <div className="App">
+        {/* Header is rendered only once */}
 
-      {/* Render content based on the mode */}
-      <div className="content">
-        {mode === "normal" && <h1 id = "welcomePrem">Welcome to Premier League Fantasy!</h1>}
-       
-      <div>
-        {mode === "signingIn" && (
-          <div className="fullscreen-container">
-            <h1 id="login-title">Sign Up</h1>
-            <form className="form">
-              <div className="input-group">
-                <label htmlFor="newUsername"><b>New Username</b></label>
-                <input
-                  type="text"
-                  placeholder="Enter New Username"
-                  id="newUsername"
-                  required
-                />
-                <span className="msg">Username is required</span>
-              </div>
+        <Header
+          mode={mode}
+          setMode={setMode}
+          username={loggedInUser?.username || "User"}
+          setLoggedInUser={setLoggedInUser}
+          handleLogout={handleLogout}
+        />
 
-              <div className="input-group">
-                <label htmlFor="newPassword"><b>New Password</b></label>
-                <input type="password" placeholder="Enter New Password" id="newPassword" required />
-                <span className="msg">Password must be strong</span>
-              </div>
+        {/* Main content */}
+        <div className="content">
+          {/* Conditional rendering for authentication modes */}
+          {mode === "normal" && <h1 className='welcomePrem'>Welcome to Premier League Fantasy!</h1>}
+          {mode === "signingIn" && (
+            <SignUpForm
+              formData={formData}
+              handleInputChange={handleInputChange}
+              handleSignUp={handleSignUp}
+              setMode={setMode}
+            />
+          )}
+          {mode === "loggingIn" && (
 
-              <button type="submit" className="login-button" onClick={handleSignUp}>Sign Up</button>
-            </form>
-           
-          </div>
-        )}
+            <LoginForm
+              formData={formData}
+              handleInputChange={handleInputChange}
+              handleLogin={handleLogin}
+              setMode={setMode}
+            />
 
-        {mode === "loggingIn" && (
-          <div className="fullscreen-container">
-
-            <h1 id="login-title">Welcome</h1>
-
-            <form className="form">
-
-              <div className="input-group">
-
-                <label htmlFor="email"><b>Email</b></label>
-
-                <input type="email" placeholder="Enter Email" id="email" required/>
-
-                <span className="msg">Valid Email</span>
-
-              </div>
-
-              <div className="input-group">
-                <label htmlFor="password"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" id="password" required/>
-                <span className="msg">Incorrect Password</span>
-              </div>
-
-              <button type="submit" className="login-button">Log In</button>
-
-            </form>
-            
-          </div>
-          
-        )}
-
+          )}
+          {mode === "dashboard" && (
+            <Dashboard
+              username={loggedInUser?.username || "User"}
+              userId={loggedInUser?.user_id || null}
+            />
+          )}
         </div>
+
+        {/* Routing */}
+        <Routes>
+        <Route path="/" element={<h1>Home Page</h1>} />
+        <Route path="/team" element={<Team />} />
+        </Routes>
+
+        {/* Error and success messages */}
+        {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+        {successMessage && <p style={{ color: "green" }}>{successMessage}</p>}
       </div>
-    </div>
+
+    </BrowserRouter>
   );
 }
 
