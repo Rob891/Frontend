@@ -4,9 +4,10 @@ import Header from './app.jsx';
 import LoginForm from './Loginform.jsx';
 import SignUpForm from './SignUpForm.jsx';
 import Dashboard from './Dashboard.jsx';
+import TeamPage from './TeamPage.jsx'; // Import TeamPage component
 
 function App() {
-  const [mode, setMode] = useState("normal");
+  const [mode, setMode] = useState("normal"); // Modes: normal, signingIn, loggingIn, dashboard, teamPage
   const [formData, setFormData] = useState({
     email: "",
     username: "",
@@ -116,6 +117,13 @@ function App() {
 
         {mode === "dashboard" && (
           <Dashboard
+            username={loggedInUser?.username || "User"}
+            userId={loggedInUser?.user_id || null}
+          />
+        )}
+
+        {mode === "teamPage" && (
+          <TeamPage
             username={loggedInUser?.username || "User"}
             userId={loggedInUser?.user_id || null}
           />

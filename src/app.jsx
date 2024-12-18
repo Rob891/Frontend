@@ -2,43 +2,51 @@ import './App.css';
 import React from 'react';
 
 export default function Header({ mode, setMode, username, setLoggedInUser }) {
-  const isLoggedIn = mode === "dashboard"; // Check if the user is logged in
+  const isLoggedIn = mode === "dashboard" || mode === "teamPage"; // Check if the user is logged in or on the team page
 
   return (
     <div className="Head1">
-      <link rel="stylesheet" href="App.css"></link>
-
       <nav>
+        {/* Logo */}
         <h1 className="logo-name">Premier League Fantasy</h1>
 
         <div className="menu" id="nav-menu">
+          {/* Navigation Links */}
           <ul className="links">
-            <li><a href="#" onClick={() => setMode("normal")}>Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#" onClick={() => setMode("team")}>Team</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Connect</a></li>
+            <li>
+              <a href="#" onClick={() => setMode("normal")}>Home</a>
+            </li>
+            <li>
+              <a href="#" onClick={() => setMode("about")}>About</a>
+            </li>
+            <li>
+              <a href="#" onClick={() => setMode("teamPage")}>Team</a>
+            </li>
+            <li>
+              <a href="#" onClick={() => setMode("services")}>Services</a>
+            </li>
+            <li>
+              <a href="#" onClick={() => setMode("connect")}>Connect</a>
+            </li>
           </ul>
 
+          {/* User Section */}
           <div className="logo-container">
-            <link
-              className="logo"
-              rel="stylesheet"
-              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
-            />
             <div className="logorsignin">
               {isLoggedIn ? (
                 <>
                   <span>Welcome, {username || "User"}!</span>
-                  <button role="button" id="see-team" onClick={() => setMode("team")}>
+                  <button
+                    className="header-button"
+                    onClick={() => setMode("teamPage")}
+                  >
                     See Team
                   </button>
                   <button
-                    role="button"
-                    id="sign-out"
+                    className="header-button"
                     onClick={() => {
-                      setLoggedInUser(null); // Clear user state
-                      setMode("normal"); // Go back to home
+                      setLoggedInUser(null); // Log out user
+                      setMode("normal"); // Return to home
                     }}
                   >
                     Sign Out
@@ -47,11 +55,17 @@ export default function Header({ mode, setMode, username, setLoggedInUser }) {
               ) : (
                 <>
                   <i className="fa-solid fa-circle-user"></i>
-                  <button role="button" id="SignIn" onClick={() => setMode("signingIn")}>
-                    Sign in
+                  <button
+                    className="header-button"
+                    onClick={() => setMode("signingIn")}
+                  >
+                    Sign In
                   </button>
-                  <button role="button" id="login-button" onClick={() => setMode("loggingIn")}>
-                    Log in
+                  <button
+                    className="header-button"
+                    onClick={() => setMode("loggingIn")}
+                  >
+                    Log In
                   </button>
                 </>
               )}
