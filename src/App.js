@@ -4,21 +4,25 @@ import Header from './app.jsx';
 import LoginForm from './Loginform.jsx';
 import SignUpForm from './SignUpForm.jsx';
 import Dashboard from './Dashboard.jsx';
-import TeamPage from './TeamPage.jsx'; // Import TeamPage component
+import TeamPage from './TeamPage.jsx';
+import LoadingSpinner from './LoadingSpinner.jsx'; // Import loading spinner
 
 function App() {
-  const [mode, setMode] = useState("normal"); // Modes: normal, signingIn, loggingIn, dashboard, teamPage
+  const [mode, setMode] = useState("normal"); // Modes: normal, signingIn, loggingIn, dashboard, teamPage, about, services, connect
   const [formData, setFormData] = useState({
     email: "",
     username: "",
     password: "",
   });
+
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // Add loading state
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const response = await fetch("http://localhost:5001/users/login", {
         method: "POST",
@@ -40,11 +44,17 @@ function App() {
       }
     } catch (err) {
       setErrorMessage("An error occurred. Please try again.");
+    } finally {
+      setTimeout(() => {
+      
+      }, 1000);
+      setIsLoading(false);
     }
   };
 
   const handleSignUp = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const response = await fetch("http://localhost:5001/users/register", {
         method: "POST",
@@ -59,6 +69,7 @@ function App() {
       if (response.ok) {
         const data = await response.json();
         setLoggedInUser(data.user);
+        setFormData({ email: "", username: "", password: "" });
         setSuccessMessage("Registration successful! Redirecting to dashboard...");
         setMode("dashboard");
       } else {
@@ -67,6 +78,11 @@ function App() {
       }
     } catch (err) {
       setErrorMessage("An error occurred. Please try again.");
+    } finally {
+      setTimeout(() => {
+      
+      }, 1000);
+      setIsLoading(false);
     }
   };
 
@@ -86,6 +102,8 @@ function App() {
 
   return (
     <div className="App">
+      {isLoading && <LoadingSpinner />} {/* Show spinner during loading */}
+      
       <Header 
         mode={mode} 
         setMode={setMode} 
@@ -127,6 +145,14 @@ function App() {
             username={loggedInUser?.username || "User"}
             userId={loggedInUser?.user_id || null}
           />
+        )}
+
+        {/* Placeholder for future modes */}
+        {["about", "services", "connect"].includes(mode) && (
+          <div>
+            <h2>{mode.charAt(0).toUpperCase() + mode.slice(1)} Page</h2>
+            <p>This page is under construction.</p>
+          </div>
         )}
       </div>
 

@@ -11,6 +11,7 @@ export default function Header({ mode, setMode, username, setLoggedInUser }) {
         <h1 className="logo-name">Premier League Fantasy</h1>
 
         <div className="menu" id="nav-menu">
+          
           {/* Navigation Links */}
           <ul className="links">
             <li>
