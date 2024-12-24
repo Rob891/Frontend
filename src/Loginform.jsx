@@ -1,4 +1,4 @@
-// LoginForm.jsx
+
 import React from "react";
 
 function LoginForm({ formData, handleInputChange, handleLogin, setMode }) {

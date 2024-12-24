@@ -5,10 +5,10 @@ import LoginForm from './Loginform.jsx';
 import SignUpForm from './SignUpForm.jsx';
 import Dashboard from './Dashboard.jsx';
 import TeamPage from './TeamPage.jsx';
-import LoadingSpinner from './LoadingSpinner.jsx'; // Import loading spinner
+import LoadingSpinner from './LoadingSpinner.jsx';
 
 function App() {
-  const [mode, setMode] = useState("normal"); // Modes: normal, signingIn, loggingIn, dashboard, teamPage, about, services, connect
+  const [mode, setMode] = useState("normal");
   const [formData, setFormData] = useState({
     email: "",
     username: "",
@@ -18,7 +18,7 @@ function App() {
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-  const [isLoading, setIsLoading] = useState(false); // Add loading state
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -45,9 +45,7 @@ function App() {
     } catch (err) {
       setErrorMessage("An error occurred. Please try again.");
     } finally {
-      setTimeout(() => {
-      
-      }, 1000);
+      setTimeout(() => {}, 1000);
       setIsLoading(false);
     }
   };
@@ -79,9 +77,7 @@ function App() {
     } catch (err) {
       setErrorMessage("An error occurred. Please try again.");
     } finally {
-      setTimeout(() => {
-      
-      }, 1000);
+      setTimeout(() => {}, 1000);
       setIsLoading(false);
     }
   };
@@ -102,7 +98,7 @@ function App() {
 
   return (
     <div className="App">
-      {isLoading && <LoadingSpinner />} {/* Show spinner during loading */}
+      {isLoading && <LoadingSpinner />}
       
       <Header 
         mode={mode} 
@@ -147,7 +143,6 @@ function App() {
           />
         )}
 
-        {/* Placeholder for future modes */}
         {["about", "services", "connect"].includes(mode) && (
           <div>
             <h2>{mode.charAt(0).toUpperCase() + mode.slice(1)} Page</h2>

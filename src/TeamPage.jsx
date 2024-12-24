@@ -1,25 +1,24 @@
 import React, { useState, useEffect } from "react";
-import PlayerSelection from "./PlayerSelection"; // Import the PlayerSelection component
+import PlayerSelection from "./PlayerSelection";
 
 function TeamPage({ userId }) {
   const [teamName, setTeamName] = useState("");
   const [fantasyTeam, setFantasyTeam] = useState(null);
   const [fantasyTeamPlayers, setFantasyTeamPlayers] = useState([]);
+  const [selectedPlayers, setSelectedPlayers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
   const [showPlayerSelection, setShowPlayerSelection] = useState(false);
 
-  // Fetch existing fantasy team for the user
   useEffect(() => {
     const fetchFantasyTeam = async () => {
       try {
         const response = await fetch(`http://localhost:5001/fantasy-team/user/${userId}`);
         if (response.ok) {
           const data = await response.json();
-          const team = data[0]; // Assuming only one team per user
+          const team = data[0];
           setFantasyTeam(team);
 
-          // Fetch players in the fantasy team
           if (team) {
             const playersResponse = await fetch(
               `http://localhost:5001/fantasy-team-players/${team.fantasy_team_id}`
@@ -27,12 +26,8 @@ function TeamPage({ userId }) {
             if (playersResponse.ok) {
               const playersData = await playersResponse.json();
               setFantasyTeamPlayers(playersData.data);
-            } else {
-              console.log("No players found for the fantasy team.");
             }
           }
-        } else {
-          console.log("No fantasy team found for the user.");
         }
       } catch (err) {
         console.error("Error fetching fantasy team:", err);
@@ -76,28 +71,21 @@ function TeamPage({ userId }) {
     }
   };
 
-  const handlePlayerSelect = async (player) => {
-    try {
-      const response = await fetch(`http://localhost:5001/fantasy-team-players/add`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          fantasy_team_id: fantasyTeam.fantasy_team_id,
-          player_id: player.player_id,
-        }),
-      });
+  const handlePlayerSelect = (player) => {
+    if (selectedPlayers.length >= 11) {
+      setMessage("You can only select up to 11 players for your team.");
+      return;
+    }
 
-      if (response.ok) {
-        setFantasyTeamPlayers((prev) => [...prev, player]);
-        setMessage(`${player.name} added to your team.`);
-      } else {
-        const error = await response.json();
-        setMessage(`Error: ${error.message}`);
-      }
-    } catch (err) {
-      setMessage(`Error: ${err.message}`);
+    setSelectedPlayers((prevPlayers) => [...prevPlayers, player]);
+  };
+
+  const handleFinishSelection = () => {
+    if (selectedPlayers.length === 11) {
+      setMessage("Team finalized!");
+      setShowPlayerSelection(false);
+    } else {
+      setMessage("Please select 11 players to finalize your team.");
     }
   };
 
@@ -113,7 +101,12 @@ function TeamPage({ userId }) {
           <p>Budget Remaining: ${fantasyTeam.budget}</p>
           {fantasyTeamPlayers.length === 0 ? (
             showPlayerSelection ? (
-              <PlayerSelection onPlayerSelect={handlePlayerSelect} />
+              <PlayerSelection
+                onPlayerAdded={handlePlayerSelect}
+                fantasyTeamId={fantasyTeam.fantasy_team_id}
+                selectedPlayers={selectedPlayers}
+                onFinishSelection={handleFinishSelection}
+              />
             ) : (
               <button onClick={() => setShowPlayerSelection(true)}>Select Players</button>
             )
@@ -122,6 +115,17 @@ function TeamPage({ userId }) {
               <h3>Players:</h3>
               <ul>
                 {fantasyTeamPlayers.map((player) => (
+                  <li key={player.player_id}>{player.name}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {selectedPlayers.length === 11 && (
+            <div>
+              <h3>Your Final Team:</h3>
+              <ul>
+                {selectedPlayers.map((player) => (
                   <li key={player.player_id}>{player.name}</li>
                 ))}
               </ul>

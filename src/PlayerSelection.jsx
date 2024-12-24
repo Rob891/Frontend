@@ -1,85 +1,87 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
+function PlayerSelection({ onPlayerAdded, fantasyTeamId, selectedPlayers, onFinishSelection }) {
+  const [allPlayers, setAllPlayers] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-
-function PlayerSelection({ onPlayerAdded, fantasyTeamId }) {
-    const [allPlayers, setAllPlayers] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("");
-  
-    const fetchAllPlayers = async () => {
-      console.log("Fetching all players...");
-      setLoading(true);
-      try {
-        const response = await fetch("http://localhost:5001/players");
-        console.log("Response received for all players:", response);
-        if (!response.ok) {
-          throw new Error("Failed to fetch all players");
-        }
-        const data = await response.json();
-        console.log("All players data:", data);
-        setAllPlayers(data);
-      } catch (err) {
-        setError(err.message);
-        console.error("Error fetching all players:", err);
-      } finally {
-        setLoading(false);
+  const fetchAllPlayers = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch("http://localhost:5001/players");
+      if (!response.ok) {
+        throw new Error("Failed to fetch all players");
       }
-    };
-  
-    const handlePlayerSelect = async (player) => {
-      try {
-        const response = await fetch("http://localhost:5001/fantasy-team-players/add", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            fantasy_team_id: fantasyTeamId,
-            player_id: player.player_id,
-            is_captain: false, // Explicitly set default
-            points: 0,         // Explicitly set default
-          }),
-        });
-  
-        if (response.ok) {
-          const result = await response.json();
-          console.log("Player added:", result);
-          onPlayerAdded(player); // Notify parent component
-        } else {
-          const error = await response.json();
-          console.error("Error adding player:", error);
-          setError(`Error adding player: ${error.error || "Unknown error"}`);
-        }
-      } catch (err) {
-        console.error("Error adding player:", err);
-        setError(`Error adding player: ${err.message}`);
-      }
-    };
-  
-    return (
-      <div className="player-selection">
-        <button onClick={fetchAllPlayers} className="fetch-all-players-button">
-          Show Players
+      const data = await response.json();
+      setAllPlayers(data);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handlePlayerSelect = (player) => {
+    if (selectedPlayers.length >= 11) {
+      setError("You can only select up to 11 players for your team.");
+      return;
+    }
+
+    onPlayerAdded(player);
+  };
+
+  const getButtonText = (player) => {
+    if (selectedPlayers.some((selectedPlayer) => selectedPlayer.player_id === player.player_id)) {
+      return "Submitted";
+    }
+    return "Select";
+  };
+
+  useEffect(() => {
+    fetchAllPlayers();
+  }, []);
+
+  const handleFinishSelection = () => {
+    if (selectedPlayers.length === 11) {
+      onFinishSelection();
+    } else {
+      setError("Please select 11 players to complete your team.");
+    }
+  };
+
+  return (
+    <div className="player-selection">
+      {loading && <p>Loading players...</p>}
+      {error && <p style={{ color: "red" }}>{error}</p>}
+
+      {allPlayers.length > 0 && (
+        <div className="player-grid">
+          {allPlayers.map((player) => (
+            <div key={player.player_id} className="player-card">
+              <img
+                src={`https://resources.premierleague.com/premierleague/photos/players/110x140/p${player.fpl_player_id}.png`}
+                alt={player.name}
+              />
+              <h3>{player.name}</h3>
+              <p>Position: {player.position}</p>
+              <button
+                onClick={() => handlePlayerSelect(player)}
+                disabled={selectedPlayers.some((selectedPlayer) => selectedPlayer.player_id === player.player_id)}
+              >
+                {getButtonText(player)}
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {selectedPlayers.length === 11 && (
+        <button onClick={handleFinishSelection} className="finish-selection-button">
+          Finish Selection
         </button>
-  
-        {loading && <p>Loading players...</p>}
-        {error && <p style={{ color: "red" }}>Error: {error}</p>}
-  
-        {allPlayers.length > 0 && (
-          <div className="player-grid">
-            {allPlayers.map((player) => (
-              <div key={player.player_id} className="player-card">
-                <h3>{player.name}</h3>
-                <p>Position: {player.position}</p>
-                <button onClick={() => handlePlayerSelect(player)}>Select</button>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-    );
-  }
-  
-  export default PlayerSelection;
-  
+      )}
+    </div>
+  );
+}
+
+export default PlayerSelection;
