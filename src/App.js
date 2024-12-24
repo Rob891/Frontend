@@ -24,7 +24,7 @@ function App() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await fetch("http://localhost:5001/users/login", {
+      const response = await fetch("https://backend-1-oq10.onrender.com/users/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -54,7 +54,7 @@ function App() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await fetch("http://localhost:5001/users/register", {
+      const response = await fetch("https://backend-1-oq10.onrender.com/users/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

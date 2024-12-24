@@ -8,7 +8,7 @@ function PlayerSelection({ onPlayerAdded, fantasyTeamId, selectedPlayers, onFini
   const fetchAllPlayers = async () => {
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:5001/players");
+      const response = await fetch("https://backend-1-oq10.onrender.com/players");
       if (!response.ok) {
         throw new Error("Failed to fetch all players");
       }

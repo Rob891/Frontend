@@ -13,7 +13,7 @@ function TeamPage({ userId }) {
   useEffect(() => {
     const fetchFantasyTeam = async () => {
       try {
-        const response = await fetch(`http://localhost:5001/fantasy-team/user/${userId}`);
+        const response = await fetch(`https://backend-1-oq10.onrender.com/fantasy-team/user/${userId}`);
         if (response.ok) {
           const data = await response.json();
           const team = data[0];
@@ -21,7 +21,7 @@ function TeamPage({ userId }) {
 
           if (team) {
             const playersResponse = await fetch(
-              `http://localhost:5001/fantasy-team-players/${team.fantasy_team_id}`
+              `https://backend-1-oq10.onrender.com/fantasy-team-players/${team.fantasy_team_id}`
             );
             if (playersResponse.ok) {
               const playersData = await playersResponse.json();
@@ -46,7 +46,7 @@ function TeamPage({ userId }) {
     }
 
     try {
-      const response = await fetch("http://localhost:5001/fantasy-team", {
+      const response = await fetch("https://backend-1-oq10.onrender.com/fantasy-team", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

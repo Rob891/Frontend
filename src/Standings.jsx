@@ -9,7 +9,7 @@ function StandingsWidget() {
   useEffect(() => {
     const fetchStandings = async () => {
       try {
-        const response = await axios.get("http://localhost:5001/api/fpl/teams/standings");
+        const response = await axios.get("https://backend-1-oq10.onrender.com/api/fpl/teams/standings");
         console.log("API Response:", response.data);
         if (response.data && Array.isArray(response.data)) {
           setStandings(response.data);
