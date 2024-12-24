@@ -9,19 +9,19 @@ function SignUpForm({ formData, handleInputChange, handleSignUp, setMode }) {
         <div className="input-group">
           <label htmlFor="email">Email</label>
           <input
-            type="email"
-            id="email"
-            value={formData.email}
-            onChange={handleInputChange}
-            placeholder="Enter your email"
-            required
+          type="email"
+          id="email" 
+          value={formData.email}
+          onChange={handleInputChange}
+          placeholder="Enter your email"
+          required
           />
         </div>
         <div className="input-group">
           <label htmlFor="username">Username</label>
           <input
             type="text"
-            id="username"
+            id="username" 
             value={formData.username}
             onChange={handleInputChange}
             placeholder="Enter your username"
@@ -32,7 +32,7 @@ function SignUpForm({ formData, handleInputChange, handleSignUp, setMode }) {
           <label htmlFor="password">Password</label>
           <input
             type="password"
-            id="password"
+            id="password" 
             value={formData.password}
             onChange={handleInputChange}
             placeholder="Enter your password"

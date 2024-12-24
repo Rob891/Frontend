@@ -11,6 +11,7 @@ function TeamPage({ userId }) {
 
   // Fetch existing fantasy team for the user
   useEffect(() => {
+
     const fetchFantasyTeam = async () => {
       try {
         const response = await fetch(`http://localhost:5001/fantasy-team/user/${userId}`);
@@ -52,6 +53,7 @@ function TeamPage({ userId }) {
 
     try {
       const response = await fetch("http://localhost:5001/fantasy-team", {
+        mode: 'no-cors',
         method: "POST",
         headers: {
           "Content-Type": "application/json",

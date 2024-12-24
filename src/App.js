@@ -8,6 +8,7 @@ import TeamPage from './TeamPage.jsx';
 import LoadingSpinner from './LoadingSpinner.jsx'; // Import loading spinner
 
 function App() {
+
   const [mode, setMode] = useState("normal"); // Modes: normal, signingIn, loggingIn, dashboard, teamPage, about, services, connect
   const [formData, setFormData] = useState({
     email: "",
@@ -25,6 +26,7 @@ function App() {
     setIsLoading(true);
     try {
       const response = await fetch("http://localhost:5001/users/login", {
+
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -55,6 +57,10 @@ function App() {
   const handleSignUp = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+
+    console.log("Sign-up form data:", formData); // Debug log
+
+
     try {
       const response = await fetch("http://localhost:5001/users/register", {
         method: "POST",
@@ -88,11 +94,13 @@ function App() {
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [id]: value,
-    }));
+    setFormData((prev) => {
+      const updatedData = { ...prev, [id]: value };
+      console.log("Updated form data:", updatedData); // Debug log
+      return updatedData;
+    });
   };
+  
 
   const handleLogout = () => {
     setLoggedInUser(null);
